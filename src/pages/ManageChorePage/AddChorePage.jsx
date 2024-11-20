@@ -1,5 +1,5 @@
 import ChoreForm from "../../components/ChoreForm/ChoreForm";
-import "./AddChorePage.scss";
+import "./ManageChorePage.scss";
 
 function AddChorePage({ profiles, setChores }) {
   return (

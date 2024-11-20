@@ -4,7 +4,8 @@ import axios from "axios";
 import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage/HomePage";
 import ChoreDetailsPage from "./pages/ChoreDetailsPage/ChoreDetailsPage";
-import AddChorePage from "./pages/AddChorePage/AddChorePage";
+import AddChorePage from "./pages/ManageChorePage/AddChorePage";
+import EditChorePage from "./pages/ManageChorePage/EditChorePage";
 import "./App.scss";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
@@ -50,6 +51,10 @@ function App() {
         <Route
           path="/chores/new"
           element={<AddChorePage profiles={profiles} setChores={setChores} />}
+        />
+        <Route
+          path="/chores/:id/edit"
+          element={<EditChorePage chores={chores} profiles={profiles} setChores={setChores} />}
         />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

@@ -1,15 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ChoreForm.scss";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-function ChoreForm({ profiles, setChores }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [rewardPoints, setRewardPoints] = useState(0);
-  const [profileId, setProfileId] = useState(profiles[0].id);
+function ChoreForm({ chore = null, profiles, setChores }) {
+  const [title, setTitle] = useState(
+    chore ? chore.title : ""
+  );
+
+  const [description, setDescription] = useState(
+    chore ? chore.description : ""
+  );
+
+  const [rewardPoints, setRewardPoints] = useState(
+    chore ? chore.reward_points : 0
+  );
+
+  const [profileId, setProfileId] = useState(
+    chore ? chore.profile_id : profiles[0]?.id
+  );
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,9 +36,27 @@ function ChoreForm({ profiles, setChores }) {
 
     const submitChore = async () => {
       try {
-        const { data } = await axios.post(`${BASE_URL}/api/chores`, formData);
-        setChores((prevChores) => [...prevChores, data]);
-        alert("Chore added successfully!");
+        if (chore) {
+          // Update existing chore
+          const { data } = await axios.put(
+            `${BASE_URL}/api/chores/${chore.id}`,
+            formData
+          );
+
+          setChores((prevChores) => [
+            ...prevChores.filter((c) => c.id !== chore.id),
+            data,
+          ]);
+
+          alert("Chore updated successfully!");
+        } else {
+          // Add new chore
+          const { data } = await axios.post(`${BASE_URL}/api/chores`, formData);
+
+          setChores((prevChores) => [...prevChores, data]);
+
+          alert("Chore added successfully!");
+        }
         navigate(-1);
       } catch (error) {
         console.error("Error submitting chore:", error);
@@ -35,7 +66,6 @@ function ChoreForm({ profiles, setChores }) {
     submitChore();
   };
 
-  const navigate = useNavigate();
   const handleCancel = (e) => {
     e.preventDefault();
     navigate(-1);
@@ -82,7 +112,7 @@ function ChoreForm({ profiles, setChores }) {
           ))}
         </select>
       </div>
-      <button type="submit">Add Chore</button>
+      <button type="submit">{chore ? "Save Changes" : "Add Chore"}</button>
       <button type="button" onClick={handleCancel}>
         Cancel
       </button>
