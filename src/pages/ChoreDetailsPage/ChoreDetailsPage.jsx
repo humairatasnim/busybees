@@ -34,6 +34,21 @@ function ChoreDetailsPage({ chores, profiles, setChores }) {
     }
   };
 
+  const handleCompleteChore = async () => {
+    try {
+      const { data } = await axios.put(
+        `${BASE_URL}/api/chores/${chore.id}/complete`
+      );
+      setChores((prevChores) =>
+        prevChores.map((c) => (c.id === chore.id ? data : c))
+      );
+      alert("Chore marked as complete!");
+    } catch (error) {
+      console.error("Error marking chore as complete:", error);
+      alert("There was an error marking the chore as complete.");
+    }
+  };
+
   const { id } = useParams();
   const choreId = parseInt(id, 10);
   const chore = chores.find((chore) => chore.id === choreId);
@@ -63,6 +78,13 @@ function ChoreDetailsPage({ chores, profiles, setChores }) {
       </button>
       <button type="button" onClick={handleDeleteChore}>
         Delete
+      </button>
+      <button
+        type="button"
+        onClick={handleCompleteChore}
+        disabled={chore.completed}
+      >
+        Complete Chore!
       </button>
     </main>
   );

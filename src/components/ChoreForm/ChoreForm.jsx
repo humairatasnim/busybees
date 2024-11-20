@@ -6,9 +6,7 @@ import "./ChoreForm.scss";
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 function ChoreForm({ chore = null, profiles, setChores }) {
-  const [title, setTitle] = useState(
-    chore ? chore.title : ""
-  );
+  const [title, setTitle] = useState(chore ? chore.title : "");
 
   const [description, setDescription] = useState(
     chore ? chore.description : ""
@@ -43,10 +41,9 @@ function ChoreForm({ chore = null, profiles, setChores }) {
             formData
           );
 
-          setChores((prevChores) => [
-            ...prevChores.filter((c) => c.id !== chore.id),
-            data,
-          ]);
+          setChores((prevChores) =>
+            prevChores.map((c) => (c.id === chore.id ? data : c))
+          );
 
           alert("Chore updated successfully!");
         } else {
