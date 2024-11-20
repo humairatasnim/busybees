@@ -14,6 +14,7 @@ function HomePage({ chores }) {
           </li>
         ))}
       </ul>
+      <Link to={`/chores/new`}>Add Chore</Link>
     </main>
   );
 }

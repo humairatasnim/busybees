@@ -4,12 +4,14 @@ import axios from "axios";
 import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage/HomePage";
 import ChoreDetailsPage from "./pages/ChoreDetailsPage/ChoreDetailsPage";
+import AddChorePage from "./pages/AddChorePage/AddChorePage";
 import "./App.scss";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 function App() {
   const [chores, setChores] = useState(null);
+  const [profiles, setProfiles] = useState(null);
 
   const getChores = async () => {
     try {
@@ -20,11 +22,21 @@ function App() {
     }
   };
 
+  const getProfiles = async () => {
+    try {
+      const { data } = await axios.get(`${BASE_URL}/api/profiles`);
+      setProfiles(data);
+    } catch (error) {
+      console.error("Error fetching profiles:", error);
+    }
+  };
+
   useEffect(() => {
     getChores();
+    getProfiles();
   }, []);
 
-  if (!chores) return <div>Loading chores...</div>;
+  if (!chores || !profiles) return <div>Loading...</div>;
 
   return (
     <BrowserRouter>
@@ -33,7 +45,11 @@ function App() {
         <Route path="/" element={<HomePage chores={chores} />} />
         <Route
           path="/chores/:id"
-          element={<ChoreDetailsPage chores={chores} />}
+          element={<ChoreDetailsPage chores={chores} profiles={profiles} />}
+        />
+        <Route
+          path="/chores/new"
+          element={<AddChorePage profiles={profiles} setChores={setChores} />}
         />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
