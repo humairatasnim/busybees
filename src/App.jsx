@@ -46,7 +46,7 @@ function App() {
         <Route path="/" element={<HomePage chores={chores} />} />
         <Route
           path="/chores/:id"
-          element={<ChoreDetailsPage chores={chores} profiles={profiles} setChores={setChores} />}
+          element={<ChoreDetailsPage setChores={setChores} />}
         />
         <Route
           path="/chores/new"

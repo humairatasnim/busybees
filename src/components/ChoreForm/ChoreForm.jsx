@@ -6,6 +6,8 @@ import "./ChoreForm.scss";
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 function ChoreForm({ chore = null, profiles, setChores }) {
+  const navigate = useNavigate();
+
   const [title, setTitle] = useState(chore ? chore.title : "");
 
   const [description, setDescription] = useState(
@@ -19,8 +21,6 @@ function ChoreForm({ chore = null, profiles, setChores }) {
   const [profileId, setProfileId] = useState(
     chore ? chore.profile_id : profiles[0]?.id
   );
-
-  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
