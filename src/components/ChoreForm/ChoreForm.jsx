@@ -84,7 +84,6 @@ function ChoreForm({ chore = null, profiles, setChores }) {
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          required
         ></textarea>
       </div>
       <div>
@@ -104,7 +103,7 @@ function ChoreForm({ chore = null, profiles, setChores }) {
         >
           {profiles.map((profile) => (
             <option key={profile.id} value={profile.id}>
-              {profile.name} ({profile.age})
+              {profile.name}
             </option>
           ))}
         </select>
