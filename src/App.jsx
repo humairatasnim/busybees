@@ -6,6 +6,8 @@ import HomePage from "./pages/HomePage/HomePage";
 import ChoreDetailsPage from "./pages/ChoreDetailsPage/ChoreDetailsPage";
 import AddChorePage from "./pages/ManageChorePage/AddChorePage";
 import EditChorePage from "./pages/ManageChorePage/EditChorePage";
+import RegisterPage from "./pages/AuthPage/RegisterPage";
+import LoginPage from "./pages/AuthPage/LoginPage";
 import "./App.scss";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
@@ -44,6 +46,8 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage chores={chores} />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route
           path="/chores/:id"
           element={<ChoreDetailsPage setChores={setChores} />}
