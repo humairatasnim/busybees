@@ -23,6 +23,10 @@
     overflow: hidden;
   }
 
+  &__item--completed {
+    opacity: 0.5;
+  }
+
   &__link {
     display: flex;
     justify-content: space-between;
@@ -46,6 +50,11 @@
     gap: 0.5rem;
   }
 
+  &__title--completed {
+    text-decoration: line-through;
+    color: $dark-gray;
+  }
+
   &__image-wrapper {
     width: 2.5rem;
     height: 2.5rem;
@@ -64,9 +73,5 @@
     display: flex;
     align-items: center;
     gap: 2rem;
-  }
-
-  &__star-icon {
-    color: $orange;
   }
 }

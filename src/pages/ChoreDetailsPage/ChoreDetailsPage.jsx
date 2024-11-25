@@ -39,13 +39,13 @@ function ChoreDetailsPage({ setChores }) {
     navigate(`/chores/${chore.id}/edit`);
   };
 
-  const handleCompleteChore = async () => {
-    try {
-      await axios.patch(`${BASE_URL}/api/chores/${chore.id}/complete`);
+  const handleCompletionToggle = async () => {
+    const action = chore.completed ? 'undo' : 'complete';
 
-      const updatedChoreResponse = await axios.get(
-        `${BASE_URL}/api/chores/${chore.id}`
-      );
+    try {
+      await axios.patch(`${BASE_URL}/api/chores/${chore.id}/${action}`);
+
+      const updatedChoreResponse = await axios.get(`${BASE_URL}/api/chores/${chore.id}`);
       setChore(updatedChoreResponse.data);
 
       const updatedProfileResponse = await axios.get(
@@ -53,10 +53,16 @@ function ChoreDetailsPage({ setChores }) {
       );
       setProfile(updatedProfileResponse.data);
 
-      alert("Chore marked as complete!");
+      setChores((prevChores) => 
+        prevChores.map((c) => 
+          c.id === updatedChoreResponse.data.id ? updatedChoreResponse.data : c
+        )
+      );
+
+      alert(chore.completed ? "Chore marked as incomplete!" : "Chore marked as complete!");
     } catch (error) {
-      console.error("Error marking chore as complete:", error);
-      alert("There was an error completing the chore.");
+      console.error(`Error performing action '${action}' on chore:`, error);
+      alert(`There was an error ${action}ing the chore.`);
     }
   };
 
@@ -89,20 +95,18 @@ function ChoreDetailsPage({ setChores }) {
       <p>Points: {chore.reward_points}</p>
       <p>Status: {chore.completed ? "Completed" : "Not Completed"}</p>
       <p>
-        Assigned to: {profile.name} ({profile.earned_points})
+        Assigned to: {profile.name} ({profile.earned_points} <i className="star-icon fa-solid fa-star"></i>)
       </p>
+
       <button type="button" onClick={handleEditChore}>
         Edit
       </button>
       <button type="button" onClick={handleDeleteChore}>
         Delete
       </button>
-      <button
-        type="button"
-        onClick={handleCompleteChore}
-        disabled={chore.completed}
-      >
-        Mark as Complete
+
+      <button type="button" onClick={handleCompletionToggle}>
+        {chore.completed ? "Undo Complete" : "Mark as Complete"}
       </button>
     </main>
   );
