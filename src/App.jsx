@@ -69,11 +69,11 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<HomePage chores={chores} />} />
+        <Route path="/" element={<HomePage chores={chores} profiles={profiles} />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
 
-        <Route path="/chores" element={<HomePage chores={chores} />} />
+        <Route path="/chores" element={<HomePage chores={chores} profiles={profiles} />} />
         <Route path="/chores/:id" element={<ChoreDetailsPage setChores={setChores} />} />
         <Route path="/chores/new" element={<AddChorePage profiles={profiles} setChores={setChores} />} />
         <Route path="/chores/:id/edit" element={ <EditChorePage chores={chores} profiles={profiles} setChores={setChores} />} />

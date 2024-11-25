@@ -27,7 +27,7 @@ function Header() {
   };
 
   return (
-    <header>
+    <header className="header">
       <Link to="/">
         <h1>🐝 BusyBees</h1>
       </Link>

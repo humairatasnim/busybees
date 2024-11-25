@@ -1,7 +1,32 @@
 @use "./assets/styles/variables" as *;
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@use "./assets/styles/mixins" as *;
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200..1000&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
   font-family: "Nunito", sans-serif;
   background-color: $bg-color;
+}
+
+h1 {
+  font-weight: $extrabold;
+}
+
+.container {
+  padding: 1rem;
+
+  @include tablet {
+    padding: 1rem 2.25rem;
+  }
+
+  @include desktop {
+    padding: 1rem 8.125rem;
+  }
 }
