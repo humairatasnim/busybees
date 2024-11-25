@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import EmojiPicker from "emoji-picker-react";
 import "./ChoreForm.scss";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
@@ -22,6 +23,9 @@ function ChoreForm({ chore = null, profiles, setChores }) {
     chore ? chore.profile_id : profiles[0]?.id
   );
 
+  const [emoji, setEmoji] = useState(chore ? chore.emoji : "");
+  const [isPickerVisible, setIsPickerVisible] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -29,6 +33,7 @@ function ChoreForm({ chore = null, profiles, setChores }) {
       title,
       description,
       reward_points: parseInt(rewardPoints, 10),
+      emoji,
       profile_id: parseInt(profileId, 10),
     };
 
@@ -68,8 +73,41 @@ function ChoreForm({ chore = null, profiles, setChores }) {
     navigate(-1);
   };
 
+  const toggleEmojiPicker = () => {
+    setIsPickerVisible(!isPickerVisible);
+  };
+
+  const handleEmojiClick = (emojiData, e) => {
+    setEmoji(emojiData.imageUrl);
+    setIsPickerVisible(false);
+  };
+
   return (
     <form onSubmit={handleSubmit}>
+      <div>
+        <label>Emoji</label>
+        {emoji ? (
+          <>
+            <img src={emoji} alt="Chore emoji" />
+            <button type="button" onClick={toggleEmojiPicker}>
+              Change Emoji
+            </button>
+          </>
+        ) : (
+          <button type="button" onClick={toggleEmojiPicker}>
+            Choose Emoji
+          </button>
+        )}
+
+        {isPickerVisible && (
+          <EmojiPicker
+            onEmojiClick={handleEmojiClick}
+            previewConfig={{
+              showPreview: false,
+            }}
+          />
+        )}
+      </div>
       <div>
         <label>Title</label>
         <input

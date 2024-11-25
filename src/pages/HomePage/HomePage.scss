@@ -26,6 +26,7 @@
   &__link {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background-color: $white;
     transition: background-color 0.3s ease;
     padding: 1.5rem;
@@ -39,12 +40,33 @@
     }
   }
 
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__image-wrapper {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: $bg-color;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__image {
+    width: 75%;
+  }
+
   &__details {
     display: flex;
+    align-items: center;
     gap: 2rem;
   }
 
-  &__star {
+  &__star-icon {
     color: $orange;
   }
 }
