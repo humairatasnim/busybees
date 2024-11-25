@@ -51,7 +51,7 @@ No external sources of data will be used in the app.
 
 ### Mockups
 
-To be updated.
+![](public/images/mockup.png)
 
 ### Data
 
