@@ -8,6 +8,9 @@ import AddChorePage from "./pages/ManageChorePage/AddChorePage";
 import EditChorePage from "./pages/ManageChorePage/EditChorePage";
 import RegisterPage from "./pages/AuthPage/RegisterPage";
 import LoginPage from "./pages/AuthPage/LoginPage";
+import ProfileDetailsPage from "./pages/ProfileDetailsPage/ProfileDetailsPage";
+import AddProfilePage from "./pages/ManageProfilePage/AddProfilePage";
+import EditProfilePage from "./pages/ManageProfilePage/EditProfilePage";
 import "./App.scss";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
@@ -45,7 +48,10 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<HomePage chores={chores} />} />
+        <Route
+          path="/"
+          element={<HomePage chores={chores} profiles={profiles} />}
+        />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route
@@ -58,7 +64,27 @@ function App() {
         />
         <Route
           path="/chores/:id/edit"
-          element={<EditChorePage chores={chores} profiles={profiles} setChores={setChores} />}
+          element={
+            <EditChorePage
+              chores={chores}
+              profiles={profiles}
+              setChores={setChores}
+            />
+          }
+        />
+        <Route
+          path="/profiles/:id"
+          element={<ProfileDetailsPage setProfiles={setProfiles} />}
+        />
+        <Route
+          path="/profiles/new"
+          element={<AddProfilePage setProfiles={setProfiles} />}
+        />
+        <Route
+          path="/profiles/:id/edit"
+          element={
+            <EditProfilePage profiles={profiles} setProfiles={setProfiles} />
+          }
         />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
