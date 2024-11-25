@@ -11,6 +11,7 @@ import ChoreDetailsPage from "./pages/ChoreDetailsPage/ChoreDetailsPage";
 import AddChorePage from "./pages/ManageChorePage/AddChorePage";
 import EditChorePage from "./pages/ManageChorePage/EditChorePage";
 
+import FamilyPage from "./pages/FamilyPage/FamilyPage";
 import ProfileDetailsPage from "./pages/ProfileDetailsPage/ProfileDetailsPage";
 import AddProfilePage from "./pages/ManageProfilePage/AddProfilePage";
 import EditProfilePage from "./pages/ManageProfilePage/EditProfilePage";
@@ -68,14 +69,16 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<HomePage chores={chores} profiles={profiles} />} />
+        <Route path="/" element={<HomePage chores={chores} />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
 
+        <Route path="/chores" element={<HomePage chores={chores} />} />
         <Route path="/chores/:id" element={<ChoreDetailsPage setChores={setChores} />} />
         <Route path="/chores/new" element={<AddChorePage profiles={profiles} setChores={setChores} />} />
         <Route path="/chores/:id/edit" element={ <EditChorePage chores={chores} profiles={profiles} setChores={setChores} />} />
 
+        <Route path="/profiles" element={<FamilyPage profiles={profiles} />} />
         <Route path="/profiles/:id" element={<ProfileDetailsPage setProfiles={setProfiles} />} />
         <Route path="/profiles/new" element={<AddProfilePage setProfiles={setProfiles} />} />
         <Route path="/profiles/:id/edit" element={<EditProfilePage profiles={profiles} setProfiles={setProfiles} />} />

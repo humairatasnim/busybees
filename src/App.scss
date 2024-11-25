@@ -1,5 +1,7 @@
+@use "./assets/styles/variables" as *;
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
 body {
   font-family: "Nunito", sans-serif;
+  background-color: $bg-color;
 }
