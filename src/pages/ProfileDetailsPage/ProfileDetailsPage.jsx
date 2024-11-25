@@ -12,18 +12,27 @@ function ProfileDetailsPage({ setProfiles }) {
 
   const [profile, setProfile] = useState(null);
   const [chores, setChores] = useState([]);
+  const [redemptions, setRedemptions] = useState([]);
 
   const getProfileDetails = async () => {
     try {
+      // Fetch profile details
       const profileResponse = await axios.get(
         `${BASE_URL}/api/profiles/${profileId}`
       );
       setProfile(profileResponse.data);
 
+      // Fetch chores assigned to the profile
       const choresResponse = await axios.get(
         `${BASE_URL}/api/chores?profile_id=${profileId}`
       );
       setChores(choresResponse.data);
+
+      // Fetch rewards redeemed by the profile
+      const redemptionsResponse = await axios.get(
+        `${BASE_URL}/api/redemptions/profile/${profileId}`
+      );
+      setRedemptions(redemptionsResponse.data);
     } catch (error) {
       console.error("Error fetching profile details:", error);
     }
@@ -94,6 +103,23 @@ function ProfileDetailsPage({ setProfiles }) {
         </ul>
       ) : (
         <p>No chores assigned to this profile.</p>
+      )}
+
+      <h2>Rewards Redeemed</h2>
+      {redemptions.length > 0 ? (
+        <ul>
+          {redemptions.map((reward) => (
+            <li key={reward.id}>
+              <h3>{reward.title}</h3>
+              <p>Points Required: {reward.points_required}</p>
+              <p>
+                Redeemed On: {new Date(reward.created_at).toLocaleDateString()}
+              </p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No rewards redeemed by this profile.</p>
       )}
     </main>
   );

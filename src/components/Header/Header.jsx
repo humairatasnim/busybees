@@ -35,7 +35,6 @@ function Header() {
         {!isLoggedIn && <Link to="/login">Login</Link>}
         {isLoggedIn && (
           <>
-            <Link to="/family">Family</Link>
             <button onClick={handleLogout}>Log Out</button>
           </>
         )}
