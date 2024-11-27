@@ -78,7 +78,7 @@ function App() {
         <Route path="/chores/new" element={<AddChorePage profiles={profiles} setChores={setChores} />} />
         <Route path="/chores/:id/edit" element={ <EditChorePage chores={chores} profiles={profiles} setChores={setChores} />} />
 
-        <Route path="/profiles" element={<FamilyPage profiles={profiles} />} />
+        <Route path="/family" element={<FamilyPage profiles={profiles} />} />
         <Route path="/profiles/:id" element={<ProfileDetailsPage setProfiles={setProfiles} />} />
         <Route path="/profiles/new" element={<AddProfilePage setProfiles={setProfiles} />} />
         <Route path="/profiles/:id/edit" element={<EditProfilePage profiles={profiles} setProfiles={setProfiles} />} />

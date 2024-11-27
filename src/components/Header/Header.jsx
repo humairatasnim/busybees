@@ -32,6 +32,9 @@ function Header() {
         <h1>🐝 BusyBees</h1>
       </Link>
       <nav>
+        <Link to="/family">Family</Link>
+        <Link to="/chores">Chores</Link>
+        <Link to="/rewards">Rewards</Link>
         {!isLoggedIn && <Link to="/login">Login</Link>}
         {isLoggedIn && (
           <>
