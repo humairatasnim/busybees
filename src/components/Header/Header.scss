@@ -1,16 +1,71 @@
 @use "../../assets/styles/variables" as *;
 @use "../../assets/styles/mixins" as *;
+@use "../../assets/styles/global" as *;
 
 .header {
-  padding: 1rem;
+  background-color: $graphite;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+  gap: 1.5rem;
 
   @include tablet {
-    padding: 1rem 2.25rem;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
   }
 
   @include desktop {
-    padding: 1rem 8.125rem;
+    padding: 2rem 8.125rem;
+  }
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__link {
+    height: 28px;
+  }
+
+  &__image {
+    max-height: 28px;
+  }
+
+  .nav {
+    &__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 1rem;
+
+      @include desktop {
+        gap: 1.5rem;
+      }
+    }
+
+    &__item {
+      flex: 1;
+      display: flex;
+    }
+
+    &__link {
+      @extend .button;
+      color: $cloud;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &.active {
+        background-color: $instock-black;
+        color: $white;
+        text-decoration: none;
+      }
+    }
   }
 }

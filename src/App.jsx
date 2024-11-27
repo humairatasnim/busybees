@@ -12,7 +12,7 @@ import AddChorePage from "./pages/ManageChorePage/AddChorePage";
 import EditChorePage from "./pages/ManageChorePage/EditChorePage";
 
 import FamilyPage from "./pages/FamilyPage/FamilyPage";
-import ProfileDetailsPage from "./pages/ProfileDetailsPage/ProfileDetailsPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import AddProfilePage from "./pages/ManageProfilePage/AddProfilePage";
 import EditProfilePage from "./pages/ManageProfilePage/EditProfilePage";
 
@@ -79,7 +79,7 @@ function App() {
         <Route path="/chores/:id/edit" element={ <EditChorePage chores={chores} profiles={profiles} setChores={setChores} />} />
 
         <Route path="/family" element={<FamilyPage profiles={profiles} />} />
-        <Route path="/profiles/:id" element={<ProfileDetailsPage setProfiles={setProfiles} />} />
+        <Route path="/profiles/:id" element={<ProfilePage setProfiles={setProfiles} />} />
         <Route path="/profiles/new" element={<AddProfilePage setProfiles={setProfiles} />} />
         <Route path="/profiles/:id/edit" element={<EditProfilePage profiles={profiles} setProfiles={setProfiles} />} />
 

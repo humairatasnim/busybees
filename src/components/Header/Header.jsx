@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 import "./Header.scss";
 
 function Header() {
@@ -28,21 +28,59 @@ function Header() {
 
   return (
     <header className="header">
-      <Link to="/">
-        <h1>🐝 BusyBees</h1>
-      </Link>
-      <nav>
-        <Link to="/family">Family</Link>
-        <Link to="/chores">Chores</Link>
-        <Link to="/rewards">Rewards</Link>
-        {!isLoggedIn && <Link to="/login">Login</Link>}
-        {isLoggedIn && (
-          <>
-            <button onClick={handleLogout}>Log Out</button>
-          </>
-        )}
+      <div className="header__logo">
+        <Link to="/" className="header__link">
+          🐝 BusyBees
+        </Link>
+      </div>
+      <nav className="nav">
+        <ul className="nav__list">
+          <li className="nav__item">
+            <NavLink
+              to="/"
+              className="nav__link"
+              activeclassname="nav__link--active"
+            >
+              Chores
+            </NavLink>
+          </li>
+          <li className="nav__item">
+            <NavLink
+              to="/family"
+              className="nav__link"
+              activeclassname="nav__link--active"
+            >
+              Family
+            </NavLink>
+          </li>
+          <li className="nav__item">
+            <NavLink
+              to="/rewards"
+              className="nav__link"
+              activeclassname="nav__link--active"
+            >
+              Rewards
+            </NavLink>
+          </li>
+        </ul>
       </nav>
     </header>
+    // <header className="header">
+    //   <Link to="/">
+    //     <h1>🐝 BusyBees</h1>
+    //   </Link>
+    //   <nav>
+    //     <Link to="/family">Family</Link>
+    //     <Link to="/chores">Chores</Link>
+    //     <Link to="/rewards">Rewards</Link>
+    //     {!isLoggedIn && <Link to="/login">Login</Link>}
+    //     {isLoggedIn && (
+    //       <>
+    //         <button onClick={handleLogout}>Log Out</button>
+    //       </>
+    //     )}
+    //   </nav>
+    // </header>
   );
 }
 
